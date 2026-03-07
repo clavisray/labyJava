@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TodoList {
-    private List<Task> tasks = new ArrayList<Task>();
+    private List<Task> tasks = new ArrayList<>();
     private int nextId = 1;
 
     private Task findById(int id) {
@@ -15,6 +15,11 @@ public class TodoList {
     }
 
     public void print() {
+        if (tasks.isEmpty()) {
+            System.out.println("Task list is empty");
+            return;
+        }
+
         for (Task t : tasks) {
             System.out.println(t);
         }
@@ -35,5 +40,13 @@ public class TodoList {
         return tasks.removeIf(task -> task.getId() == id);
     }
 
-    // dodać void setTitle/editTitle/editTask
+    // poprawić pod walidację czy newTitle jest pusty, póki co niezależnie od rezultatu wynik jest true
+
+    public boolean editTitle(int id, String newTitle) {
+        Task t = findById(id);
+        if (t == null) return false;
+
+        t.setTitle(newTitle);
+        return true;
+    }
 }

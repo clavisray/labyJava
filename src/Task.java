@@ -13,13 +13,19 @@ public class Task {
     public int getId() { return id; }
     public String getTitle() { return title; }
     public boolean isDone() { return done; }
-    public int priority() { return priority;}
+    public int getPriority() { return priority;}
 
     public void toggleDone() { done = !done; }
     public void markDone() { done = true; }
 
+    public void setTitle(String newTitle) {
+        if(newTitle != null && !newTitle.trim().isEmpty()) {
+            this.title = newTitle;
+        }
+    }
+
     @Override
     public String toString() {
-        return id + ", title: " + title + " | priority: " + priority + " status: " + (done ? "[x]" : "[ ]");
+        return "[" + id + "]" + ", title: " + title + " ,priority: " + priority + " | status " + (done ? "[x]" : "[ ]");
     }
 }
