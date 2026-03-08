@@ -46,6 +46,8 @@ public class TodoList {
         Task t = findById(id);
         if (t == null) return false;
 
+        if (newTitle == null || newTitle.trim().isEmpty()) { return false; }
+
         t.setTitle(newTitle);
         return true;
     }

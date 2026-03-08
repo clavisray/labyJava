@@ -25,7 +25,6 @@ public class Main {
             switch(userInput){
                 case 1: {
                     lista.print();
-
                     break;
                 }
                 case 2: {
@@ -35,13 +34,19 @@ public class Main {
                     String title = s.nextLine();
 
                     lista.addTask(title);
-
                     break;
                 }
                 case 3: {
                     int id = s.nextInt();
                     s.nextLine();
-                    System.out.println("Edit task is not implemented yet");
+
+                    String newTitle = s.nextLine();
+
+                    boolean ok = lista.editTitle(id, newTitle);
+                    if (!ok) {
+                        System.out.println("Task not found or name is invalid");
+                    }
+
                     break;
                 }
                 case 4: {
