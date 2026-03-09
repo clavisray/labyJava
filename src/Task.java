@@ -24,8 +24,12 @@ public class Task {
         }
     }
 
+    public void setPrio(int priority) {
+        this.priority = priority;
+    }
+
     @Override
     public String toString() {
-        return "[" + id + "]" + ", title: " + title + " ,priority: " + priority + " | status " + (done ? "[x]" : "[ ]");
+        return "[" + id + "] " + title + " | priority: " + priority + " | status " + (done ? "[x]" : "[ ]");
     }
 }

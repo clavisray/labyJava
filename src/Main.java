@@ -39,9 +39,24 @@ public class Main {
                     break;
                 }
                 case 3: {
+                    System.out.println("Choose a task that you need to delete");
+                    lista.print();
+
                     int id = s.nextInt();
                     s.nextLine();
-                    System.out.println("Edit task is not implemented yet");
+
+                    System.out.println("Enter new title");
+                    String newTitle = s.nextLine();
+
+                    System.out.println("Pick prio");
+                    int newPrio = s.nextInt();
+                    s.nextLine();
+
+                    boolean ok = lista.editTask(id, newTitle, newPrio);
+                    if (!ok) {
+                        System.out.println("Task not found or title invalid.");
+                    }
+
                     break;
                 }
                 case 4: {

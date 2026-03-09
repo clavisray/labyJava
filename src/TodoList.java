@@ -46,7 +46,21 @@ public class TodoList {
         Task t = findById(id);
         if (t == null) return false;
 
+        if (newTitle == null || newTitle.trim().isEmpty()) return false;
+
         t.setTitle(newTitle);
+        return true;
+    }
+
+    public boolean editTask(int id, String newTitle, int newPrio) {
+        Task t = findById(id);
+
+        if (t == null) return false;
+        if (newTitle == null || newTitle.trim().isEmpty()) return false;
+        if (newPrio < 1 && newPrio > 3) return false;
+
+        t.setTitle(newTitle);
+        t.setPrio(newPrio);
         return true;
     }
 }
