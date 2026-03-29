@@ -1,3 +1,5 @@
+// Zadanie 1.2
+
 import javax.swing.*;
 import java.math.BigInteger;
 

@@ -227,6 +227,7 @@ public class Main {
                 }
             }
         }
+        System.exit(0);
     }
 }
 
@@ -236,6 +237,9 @@ class Rational {
 
     //konstruktor
     public Rational(BigInteger licznik, BigInteger mianownik) {
+        if (mianownik.equals(BigInteger.ZERO)) {
+            throw new IllegalArgumentException("Mianownik nie moze byc zerem");
+        }
         this.licznik = licznik; this.mianownik = mianownik;
     }
 

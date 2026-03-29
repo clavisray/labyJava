@@ -44,9 +44,10 @@ public class Main {
                         break;
 
                     default:
-                        throw new IllegalArgumentException("Wybrano liczbę spoza zakresu. Wpisz ponownie: " + userInput);
+                        JOptionPane.showMessageDialog(null, "Wybrano zla opcje");
                 }
             }
+            System.exit(0);
         }
     }
 

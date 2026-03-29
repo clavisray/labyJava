@@ -1,3 +1,5 @@
+// Zadanie 1.4
+
 import javax.swing.*;
 
 public class Main {
