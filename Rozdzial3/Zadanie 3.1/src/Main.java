@@ -1,13 +1,55 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
-
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+class Kolejka {
+    static final int N = 5;
+    private Object[] tab;
+    private int pocz, zaost, lbel;
+    public Kolejka() {
+        pocz=0; zaost=0; lbel=0;
+        tab = new Object[N];
     }
+    void doKolejki(Object el) throws Przepelnienie {
+        if (lbel == N) {
+            throw new Przepelnienie();
+        }
+        tab[zaost] = el;
+        zaost = (zaost+1) % N;
+        ++lbel;
+    }
+    Object zKolejki() throws Niedomiar {
+        if (lbel == 0) {
+            throw new Niedomiar();
+        }
+        int ind = pocz;
+        pocz = (pocz+1) % N;
+        --lbel;
+        return tab[ind];
+    }
+}
+
+class Przepelnienie extends Exception {
+    public Przepelnienie() {
+        super("Przepelniona kolejka!");
+    }
+}
+
+class Niedomiar extends Exception {
+    public Niedomiar() {
+        super("Pusta kolejka!");
+    }
+}
+
+public class Main {
+ public static void main(String[] args) {
+     Kolejka k = new Kolejka();
+     try {
+         k.doKolejki(new Integer(7));
+         k.doKolejki(new String("Ala ma kota"));
+         k.doKolejki(new Double(3.14));
+         for (int i = 1; i <= 4; ++i)
+             System.out.println((k.zKolejki()).toString());
+     } catch (Przepelnienie e) {
+         System.out.println("Przepełniona kolejka!");
+     } catch (Niedomiar e) {
+         System.out.println("Pusta kolejka!");
+     }
+ }
 }
