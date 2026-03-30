@@ -1,13 +1,69 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+abstract class Wierzcholek {
+    Wierzcholek lewy, prawy;
+    public abstract int wartosc();
+}
+class Stala extends Wierzcholek {
+    private int wart;
+    public Stala(int x) {
+        wart = x;
+    }
+    public int wartosc() {
+        return wart;
+    }
+}
+class Dzialanie extends Wierzcholek {
+    private char op; // operator +, -, / lub *
+    public Dzialanie(char znak) {
+        op = znak;
+    }
+    public void dodajLewyArg(Wierzcholek arg) {
+        lewy = arg;
+    }
+    public void dodajPrawyArg(Wierzcholek arg) {
+        prawy = arg;
+    }
+    public int wartosc() {
+        switch (op) {
+            case ’+’: return lewy.wartosc() + prawy.wartosc();
+            case ’-’: return lewy.wartosc() - prawy.wartosc();
+            case ’/’: return lewy.wartosc() / prawy.wartosc();
+            case ’*’: return lewy.wartosc() * prawy.wartosc();
+        }
+        return 0;
+    }
+}
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+class Wyrazenie {
+    private Wierzcholek korzen;
+    private Wierzcholek utworzDrzewo(String w, int p, int q) {
+        if (p == q)
+            return new Stala(Character.digit(w.charAt(p), 10));
+        else {
+            int i = p+1, nawiasy = 0;
+            while ( (nawiasy != 0) || (w.charAt(i) == ’(’) ||
+            (w.charAt(i) == ’)’) || (Character.isDigit(w.charAt(i))))
+            {
+                if (w.charAt(i) == ’(’) ++nawiasy;
+                if (w.charAt(i) == ’)’) --nawiasy;
+                ++i;
+            }
+            Dzialanie nowy = new Dzialanie(w.charAt(i));
+            nowy.dodajLewyArg(utworzDrzewo(w, p+1, i-1));
+            nowy.dodajPrawyArg(utworzDrzewo(w, i+1, q-1));
+            return nowy;
+        }
+    }
+    public Wyrazenie(String w) {
+        korzen = utworzDrzewo(w, 0, w.length()-1);
+    }
+    public int oblicz() {
+        return korzen.wartosc();
+    }
+}
+public class Main {
+
+    public static void main(String[] args) {
+        Wyrazenie wyr = new Wyrazenie("(3*((1+2)-1))");
+        System.out.println("" + wyr.oblicz());
     }
 }
