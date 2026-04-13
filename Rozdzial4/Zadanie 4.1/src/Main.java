@@ -1,13 +1,20 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+import javax.swing.*;
+import java.io.*;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+public class Main {
+    public static void main(String[] args) throws IOException {
+
+        String trescPliku = JOptionPane.showInputDialog(null, "Edytor tekstu, wprowadz wiadomosc, a nastepnie ja zapisz");
+        String nazwaPliku = JOptionPane.showInputDialog(null, "Zapisz plik txt jako: ");
+
+        try (OutputStreamWriter writer =
+                new OutputStreamWriter(new FileOutputStream(nazwaPliku + ".txt"), "UTF-8")) {
+            writer.write(trescPliku);
+        }
+
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(nazwaPliku + ".txt"), "UTF-8"));
+        String line = reader.readLine();
+        JOptionPane.showMessageDialog(null, line);
     }
 }
