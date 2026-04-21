@@ -1,13 +1,37 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+import java.util.*;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+class Wspolrzedna implements Comparable<Wspolrzedna> {
+    private int x, y;
+    public Wspolrzedna(int _x, int _y) {
+        x = _x;
+        y = _y;
+    }
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
+    public int compareTo(Wspolrzedna w) {
+        if (this.x != w.x) {
+            return this.x - w.x;
+        }
+        return this.y - w.y;
+    }
+}
+
+// zmiana klasy na main ze względu na nazwę pliku
+public class Main {
+    private static void wypiszElementy(TreeSet zbior) {
+        Iterator it = zbior.iterator();
+        while (it.hasNext()) {
+            System.out.println((it.next()).toString());
+        }
+    }
+    public static void main(String[] args) {
+        TreeSet zbior = new TreeSet();
+        zbior.add( new Wspolrzedna(2, 3) );
+        zbior.add( new Wspolrzedna(-3, 0) );
+        zbior.add( new Wspolrzedna(-1, 2) );
+        zbior.add( new Wspolrzedna(-1, 2) );
+        zbior.add( new Wspolrzedna(-3, -2) );
+        wypiszElementy(zbior);
     }
 }
