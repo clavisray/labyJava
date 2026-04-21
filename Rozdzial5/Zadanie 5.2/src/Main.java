@@ -1,13 +1,33 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+import java.util.*;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+//wspolrzedna ma przesłonić hashcode i equals, override
+class Wspolrzedna implements Comparable<Wspolrzedna> {
+    private int x, y;
+    public Wspolrzedna(int _x, int _y) {
+        x = _x;
+        y = _y;
+    }
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
+    public int compareTo(Wspolrzedna w) {
+        if (this.x != w.x) {
+            return this.x - w.x;
+        }
+        return this.y - w.y;
+    }
+}
+
+// również zmiana nazwy klasy na main, utworzyłem wcześniej strukture plików
+public class Main {
+    public static void main(String[] args) {
+        HashMap mapa = new HashMap();
+        mapa.put(new Wspolrzedna(2, 3), new String("czerwony"));
+        mapa.put(new Wspolrzedna(-3, 0), new String("czarny"));
+        mapa.put(new Wspolrzedna(-1, 2), new String("czerwony"));
+        mapa.put(new Wspolrzedna(2, -1), new String("czarny"));
+        Wspolrzedna w = new Wspolrzedna(-1, 2);
+        System.out.println("Punkt " + w.toString()
+                + " ma kolor " + mapa.get(w));
     }
 }
