@@ -16,6 +16,16 @@ class Wspolrzedna implements Comparable<Wspolrzedna> {
         }
         return this.y - w.y;
     }
+
+    @Override
+    public int hashCode(){
+
+    }
+
+    @Override
+    public boolean equals(Object obj){
+
+    }
 }
 
 // również zmiana nazwy klasy na main, utworzyłem wcześniej strukture plików
