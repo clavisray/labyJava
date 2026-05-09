@@ -18,13 +18,15 @@ class Wspolrzedna implements Comparable<Wspolrzedna> {
     }
 
     @Override
-    public int hashCode(){
-
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Wspolrzedna that = (Wspolrzedna) o;
+        return x == that.x && y == that.y;
     }
 
     @Override
-    public boolean equals(Object obj){
-
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }
 
