@@ -5,7 +5,7 @@ class MapaKomunikatow {
         mapa.put(klucz, wartosc);
     }
 
-    public Integer pobierz(String klucz) {
+    public synchronized Integer pobierz(String klucz) {
         return (Integer) mapa.get(klucz);
     }
 }
@@ -22,11 +22,15 @@ class Watek extends Thread {
     public void run() {
         try {
             for (int i = start; i<=10; i+=2) {
-                mapako.dodaj(s + i, new Integer(i);
+                mapako.dodaj(s + i, new Integer(i));
                 Thread.sleep(50);
             }
         }
         catch (Exception e){};
+    }
+
+    public synchronized String toString() {
+        return mapako.toString();
     }
 }
 public class Main {
