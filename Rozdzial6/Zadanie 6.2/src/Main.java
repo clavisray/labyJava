@@ -8,6 +8,10 @@ class MapaKomunikatow {
     public synchronized Integer pobierz(String klucz) {
         return (Integer) mapa.get(klucz);
     }
+
+    public synchronized String toString() {
+        return mapa.toString();
+    }
 }
 class Watek extends Thread {
     private MapaKomunikatow mapako;
@@ -27,10 +31,6 @@ class Watek extends Thread {
             }
         }
         catch (Exception e){};
-    }
-
-    public synchronized String toString() {
-        return mapako.toString();
     }
 }
 public class Main {
